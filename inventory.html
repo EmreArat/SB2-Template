@@ -191,7 +191,7 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="inventory.html">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-boxes"></i>
                 </div>
@@ -777,9 +777,8 @@
         }
 
         function searchItems() {
-            const primary = document.getElementById('searchInput').value.trim();
-            const secondary = document.getElementById('quickSearchInput').value.trim();
-            state.searchTerm = (primary || secondary || '').toLowerCase();
+            state.searchTerm = document.getElementById('searchInput').value.trim() || document.getElementById('quickSearchInput').value.trim();
+            state.searchTerm = state.searchTerm.toLowerCase();
             applyStateAndRender();
         }
 
