@@ -15,7 +15,12 @@
 - Duraklat / yeniden başlat
 - Tek dosya, harici bağımlılık yok (yalnızca Google Fonts)
 
+## Test / Demo
+- [x] Otomatik tarayıcı testi (başlat, oyna, duraklat, devam)
+- [x] Ekran görüntüleri: `/opt/cursor/artifacts/tetris-demo/`
+- [x] Demo video: `tetris-demo.mp4` (~16 sn)
+- [x] İndirmeden deneme: jsDelivr / htmlpreview linkleri
+
 ## Notlar
 - Ortak API / DB gerekmez
 - DBRules dosyası yok
-EOF
