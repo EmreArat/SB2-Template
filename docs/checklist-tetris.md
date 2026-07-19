@@ -6,7 +6,7 @@
 - [x] UX odaklı arayüz bileşenleri
 - [x] Sayfa API'leri (`/api/game`, `/api/game/best-score`)
 - [x] Mobil tek ekran düzeni
-- [ ] Build ve PR
+- [x] Build ve PR
 
 ## API
 - `GET /api/game` — oyun yapılandırması
