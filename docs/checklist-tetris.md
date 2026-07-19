@@ -18,7 +18,9 @@
 ## Test / Demo
 - [x] Otomatik tarayıcı testi (başlat, oyna, duraklat, devam)
 - [x] Ekran görüntüleri: `/opt/cursor/artifacts/tetris-demo/`
-- [x] Demo video: `tetris-demo.mp4` (~16 sn)
+- [x] İlk demo video: `tetris-demo.mp4` (~16 sn)
+- [x] Tam ekran video (bloklar zeminde): `tetris-zemine-oturma.mp4` (1920x1200, ~34 sn)
+- [x] Tahta yakın plan: `tetris-tahta-yakin.mp4`
 - [x] İndirmeden deneme (çalışan): https://htmlpreview.github.io/?https://github.com/EmreArat/SB2-Template/blob/cursor/tetris-oyunu-2b95/tetris.html
 
 ## Notlar
