@@ -19,7 +19,7 @@
 - [x] Otomatik tarayıcı testi (başlat, oyna, duraklat, devam)
 - [x] Ekran görüntüleri: `/opt/cursor/artifacts/tetris-demo/`
 - [x] Demo video: `tetris-demo.mp4` (~16 sn)
-- [x] İndirmeden deneme: jsDelivr / htmlpreview linkleri
+- [x] İndirmeden deneme (çalışan): https://htmlpreview.github.io/?https://github.com/EmreArat/SB2-Template/blob/cursor/tetris-oyunu-2b95/tetris.html
 
 ## Notlar
 - Ortak API / DB gerekmez
