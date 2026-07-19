@@ -372,17 +372,20 @@
       .brand-col {
         width: 100%;
         flex-direction: row;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.45rem;
-        padding: 0;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 0.35rem;
+        padding: 0 5.1rem 0 0;
+        z-index: 1;
       }
 
       .brand {
-        font-size: 1.35rem;
+        font-size: 1.2rem;
         animation: none;
         flex: 0 0 auto;
+        align-self: center;
+        padding-left: 0.15rem;
       }
 
       .tagline,
@@ -445,8 +448,8 @@
       }
 
       canvas#board {
-        width: min(96vw, calc((100dvh - 15.5rem) * 0.5));
-        max-height: calc(100dvh - 15.5rem);
+        width: min(96vw, calc((100dvh - 17rem) * 0.5));
+        max-height: calc(100dvh - 17rem);
         margin: 0 auto;
       }
 
