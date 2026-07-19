@@ -1,14 +1,21 @@
 # Tetris Oyunu Checklist
 
 ## Görevler
-- [ ] Feature branch oluştur
-- [ ] Tek HTML dosyasında Tetris oyunu yaz
-- [ ] Klavye kontrolleri (oklar, boşluk, P)
-- [ ] Skor, seviye, sonraki parça
-- [ ] Mobil dokunmatik kontroller
-- [ ] Görsel tasarım ve animasyonlar
-- [ ] Commit, push ve PR
+- [x] Feature branch oluştur (`cursor/tetris-oyunu-2b95`)
+- [x] Tek HTML dosyasında Tetris oyunu yaz (`tetris.html`)
+- [x] Klavye kontrolleri (oklar, boşluk, P)
+- [x] Skor, seviye, sonraki parça
+- [x] Mobil dokunmatik kontroller
+- [x] Görsel tasarım ve animasyonlar
+- [x] Commit, push ve PR (#3)
+
+## Özellikler
+- 7 klasik tetromino (I, O, T, S, Z, J, L)
+- Ghost piece, satır temizleme, seviye hızlanması
+- Duraklat / yeniden başlat
+- Tek dosya, harici bağımlılık yok (yalnızca Google Fonts)
 
 ## Notlar
-- Tek dosya: `tetris.html`
 - Ortak API / DB gerekmez
+- DBRules dosyası yok
+EOF
