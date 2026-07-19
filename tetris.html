@@ -2,7 +2,9 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#0f1c24" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
   <title>BLOK — Tetris</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,6 +34,12 @@
 
     html, body {
       min-height: 100%;
+      min-height: 100dvh;
+      overscroll-behavior: none;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      user-select: none;
     }
 
     body {
@@ -41,7 +49,7 @@
         radial-gradient(ellipse 80% 60% at 10% 20%, rgba(20, 145, 155, 0.22), transparent 55%),
         radial-gradient(ellipse 70% 50% at 90% 80%, rgba(232, 93, 4, 0.16), transparent 50%),
         linear-gradient(160deg, #d6e8ee 0%, #eef5f7 45%, #f3ebe3 100%);
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     body::before {
@@ -289,20 +297,41 @@
 
     .mobile-pad {
       display: none;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.45rem;
-      margin-top: 0.75rem;
-      width: min(320px, 72vw);
-      justify-self: center;
-      grid-column: 1 / -1;
     }
 
     .mobile-pad button {
-      padding: 0.85rem 0.4rem;
-      background: rgba(255, 255, 255, 0.75);
+      min-height: 3.5rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.92);
       border: 1px solid var(--line);
       color: var(--ink);
-      font-size: 0.8rem;
+      font-size: 0.95rem;
+      touch-action: manipulation;
+    }
+
+    .mobile-pad button.pad-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: transparent;
+      font-weight: 700;
+    }
+
+    .mobile-pad button.pad-wide {
+      grid-column: 1 / -1;
+      min-height: 3.25rem;
+    }
+
+    .mobile-pad button.is-pressed {
+      transform: scale(0.96);
+      background: rgba(13, 115, 119, 0.14);
+    }
+
+    .mobile-hint {
+      display: none;
+      font-size: 0.72rem;
+      color: var(--ink-soft);
+      text-align: center;
+      line-height: 1.35;
     }
 
     .line-flash {
@@ -315,42 +344,149 @@
       100% { filter: brightness(1); }
     }
 
-    @media (max-width: 820px) {
+    @media (max-width: 820px), (max-height: 520px) and (pointer: coarse) {
+      .stage {
+        min-height: 100dvh;
+        height: 100dvh;
+        padding:
+          max(0.35rem, env(safe-area-inset-top))
+          max(0.35rem, env(safe-area-inset-right))
+          0
+          max(0.35rem, env(safe-area-inset-left));
+        place-items: stretch;
+      }
+
       .shell {
-        grid-template-columns: 1fr;
-        justify-items: center;
-        text-align: center;
-        gap: 1rem;
-      }
-
-      .brand-col,
-      .side-col {
-        width: min(320px, 72vw);
-        align-items: center;
-      }
-
-      .tagline {
-        max-width: none;
-      }
-
-      .panel {
         width: 100%;
+        max-width: 100%;
+        min-height: 0;
+        height: 100%;
+        position: relative;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        grid-template-columns: 1fr;
+        gap: 0.45rem;
+        align-items: stretch;
       }
 
-      .actions {
-        justify-content: center;
+      .brand-col {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.45rem;
+        padding: 0;
       }
 
-      .controls {
+      .brand {
+        font-size: 1.35rem;
+        animation: none;
+        flex: 0 0 auto;
+      }
+
+      .tagline,
+      .side-col .panel:last-child {
         display: none;
+      }
+
+      .brand-col .panel {
+        flex: 1 1 5.5rem;
+        min-width: 5.5rem;
+        padding: 0.55rem 0.65rem;
+      }
+
+      .brand-col .panel h2 {
+        margin-bottom: 0.2rem;
+        font-size: 0.62rem;
+      }
+
+      .brand-col .stat {
+        font-size: 1.2rem;
+      }
+
+      .brand-col .panel-label {
+        font-size: 0.68rem;
+        margin-top: 0.15rem;
+      }
+
+      .side-col {
+        width: auto;
+        position: absolute;
+        top: max(0.35rem, env(safe-area-inset-top));
+        right: max(0.35rem, env(safe-area-inset-right));
+        z-index: 2;
+        padding: 0;
+      }
+
+      .side-col .panel {
+        width: 4.6rem;
+        padding: 0.45rem;
+      }
+
+      .side-col .panel h2 {
+        font-size: 0.58rem;
+        margin-bottom: 0.25rem;
+      }
+
+      canvas#next {
+        width: 3.4rem;
+        height: 3.4rem;
+      }
+
+      .board-wrap {
+        order: 0;
+        align-self: center;
+        justify-self: center;
+        width: 100%;
+        max-width: 100%;
+        padding: 0.35rem;
+        touch-action: none;
+      }
+
+      canvas#board {
+        width: min(96vw, calc((100dvh - 15.5rem) * 0.5));
+        max-height: calc(100dvh - 15.5rem);
+        margin: 0 auto;
+      }
+
+      .overlay {
+        inset: 0.35rem;
+        padding: 1rem;
+      }
+
+      .overlay h3 {
+        font-size: 1.45rem;
+      }
+
+      .overlay p {
+        font-size: 0.84rem;
+        max-width: 14rem;
       }
 
       .mobile-pad {
         display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.45rem;
+        width: 100%;
+        padding:
+          0.55rem
+          max(0.55rem, env(safe-area-inset-right))
+          max(0.65rem, env(safe-area-inset-bottom))
+          max(0.55rem, env(safe-area-inset-left));
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(14px);
+        border-top: 1px solid var(--line);
       }
 
-      .board-wrap {
-        order: -1;
+      .mobile-hint {
+        display: block;
+        grid-column: 1 / -1;
+        margin-top: -0.15rem;
+      }
+
+      .actions {
+        display: none;
       }
     }
   </style>
@@ -406,10 +542,14 @@
       </aside>
 
       <div class="mobile-pad" aria-label="Mobil kontroller">
-        <button type="button" data-action="left">Sol</button>
-        <button type="button" data-action="rotate">Döndür</button>
-        <button type="button" data-action="right">Sağ</button>
-        <button type="button" data-action="down">Aşağı</button>
+        <button type="button" data-action="left" aria-label="Sola git">◀ Sol</button>
+        <button type="button" data-action="rotate" aria-label="Döndür">↻ Döndür</button>
+        <button type="button" data-action="right" aria-label="Sağa git">Sağ ▶</button>
+        <button type="button" class="pad-wide" data-action="down" aria-label="Aşağı indir">▼ Aşağı</button>
+        <button type="button" class="pad-primary pad-wide" data-action="drop" aria-label="Anında bırak">⬇ Bırak</button>
+        <button type="button" data-action="pause" aria-label="Duraklat">⏸</button>
+        <button type="button" data-action="restart" aria-label="Yeniden başlat">↺</button>
+        <p class="mobile-hint">Tahtada kaydır: sol/sağ/aşağı/döndür</p>
       </div>
     </div>
   </main>
@@ -458,6 +598,10 @@
       const pauseBtn = document.getElementById("pauseBtn");
       const resetBtn = document.getElementById("resetBtn");
       const boardWrap = document.getElementById("boardWrap");
+      const mobilePad = document.querySelector(".mobile-pad");
+      const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
+      const isNarrowViewport = window.matchMedia("(max-width: 820px)").matches;
+      const isMobileUi = isCoarsePointer || isNarrowViewport;
 
       let grid;
       let current;
@@ -471,6 +615,11 @@
       let running;
       let paused;
       let gameOver;
+      const touchRepeats = new Map();
+
+      if (isMobileUi) {
+        overlayText.textContent = "Başlamak için dokun. Alttaki butonlarla veya tahtada kaydırarak oyna.";
+      }
 
       function createGrid() {
         return Array.from({ length: ROWS }, () => Array(COLS).fill(null));
@@ -732,7 +881,13 @@
         if (paused) {
           cancelAnimationFrame(rafId);
           pauseBtn.textContent = "Devam";
-          showOverlay("Duraklatıldı", "Devam etmek için butona bas veya P tuşuna bas.", "Devam Et");
+          showOverlay(
+            "Duraklatıldı",
+            isMobileUi
+              ? "Devam etmek için butona veya ⏸ tuşuna dokun."
+              : "Devam etmek için butona bas veya P tuşuna bas.",
+            "Devam Et"
+          );
         } else {
           pauseBtn.textContent = "Duraklat";
           hideOverlay();
@@ -759,6 +914,18 @@
         lastDrop = performance.now();
       }
 
+      function hardDrop() {
+        if (!current || paused || gameOver || !running) return;
+        const distance = hardDropDistance(current);
+        if (distance <= 0) return;
+        current.y += distance;
+        score += distance * 2;
+        updateHud();
+        lockPiece();
+        draw();
+        lastDrop = performance.now();
+      }
+
       function handleAction(action) {
         switch (action) {
           case "left":
@@ -773,9 +940,121 @@
           case "rotate":
             rotatePiece();
             break;
+          case "drop":
+            hardDrop();
+            break;
+          case "pause":
+            if (running && !gameOver) togglePause();
+            break;
+          case "restart":
+            startGame();
+            break;
           default:
             break;
         }
+      }
+
+      function stopTouchRepeat(action) {
+        const timer = touchRepeats.get(action);
+        if (!timer) return;
+        clearInterval(timer);
+        touchRepeats.delete(action);
+      }
+
+      function startTouchRepeat(action, button) {
+        stopTouchRepeat(action);
+        handleAction(action);
+        if (!["left", "right", "down"].includes(action)) return;
+        const timer = setInterval(() => {
+          if (!running || paused || gameOver) {
+            stopTouchRepeat(action);
+            button?.classList.remove("is-pressed");
+            return;
+          }
+          handleAction(action);
+        }, 95);
+        touchRepeats.set(action, timer);
+      }
+
+      function bindMobileControls() {
+        mobilePad.querySelectorAll("button[data-action]").forEach((btn) => {
+          const action = btn.dataset.action;
+
+          const press = (event) => {
+            event.preventDefault();
+            btn.classList.add("is-pressed");
+            if (["left", "right", "down"].includes(action)) {
+              startTouchRepeat(action, btn);
+            } else {
+              handleAction(action);
+            }
+          };
+
+          const release = (event) => {
+            event.preventDefault();
+            btn.classList.remove("is-pressed");
+            stopTouchRepeat(action);
+          };
+
+          btn.addEventListener("pointerdown", press);
+          btn.addEventListener("pointerup", release);
+          btn.addEventListener("pointerleave", release);
+          btn.addEventListener("pointercancel", release);
+          btn.addEventListener("contextmenu", (event) => event.preventDefault());
+        });
+      }
+
+      function bindBoardGestures() {
+        let startX = 0;
+        let startY = 0;
+        let tracking = false;
+        const useTouch = "ontouchstart" in window;
+
+        const onStart = (event) => {
+          if (!running || paused || gameOver) return;
+          if (event.target.closest(".overlay.visible")) return;
+          if (useTouch && event.type === "pointerdown") return;
+          if (!useTouch && event.type === "touchstart") return;
+          const point = event.touches ? event.touches[0] : event;
+          startX = point.clientX;
+          startY = point.clientY;
+          tracking = true;
+        };
+
+        const onEnd = (event) => {
+          if (!tracking) return;
+          if (useTouch && event.type === "pointerup") return;
+          if (!useTouch && event.type === "touchend") return;
+          tracking = false;
+          const point = event.changedTouches ? event.changedTouches[0] : event;
+          const dx = point.clientX - startX;
+          const dy = point.clientY - startY;
+          const absX = Math.abs(dx);
+          const absY = Math.abs(dy);
+
+          if (Math.max(absX, absY) < 24) {
+            handleAction("rotate");
+            return;
+          }
+
+          if (absX > absY) {
+            handleAction(dx < 0 ? "left" : "right");
+            return;
+          }
+
+          if (dy > 0 && absY > 72) {
+            hardDrop();
+          } else if (dy > 0) {
+            handleAction("down");
+          } else {
+            handleAction("rotate");
+          }
+        };
+
+        boardWrap.addEventListener("touchstart", onStart, { passive: true });
+        boardWrap.addEventListener("touchend", onEnd, { passive: true });
+        boardWrap.addEventListener("pointerdown", onStart);
+        boardWrap.addEventListener("pointerup", onEnd);
       }
 
       document.addEventListener("keydown", (e) => {
@@ -796,8 +1075,11 @@
         else if (e.key === "ArrowUp" || e.key === " ") handleAction("rotate");
       });
 
-      document.querySelectorAll(".mobile-pad button").forEach((btn) => {
-        btn.addEventListener("click", () => handleAction(btn.dataset.action));
+      bindMobileControls();
+      bindBoardGestures();
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden && running && !paused && !gameOver) togglePause();
       });
 
       startBtn.addEventListener("click", () => {

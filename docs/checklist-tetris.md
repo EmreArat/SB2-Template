@@ -5,7 +5,7 @@
 - [x] Tek HTML dosyasında Tetris oyunu yaz (`tetris.html`)
 - [x] Klavye kontrolleri (oklar, boşluk, P)
 - [x] Skor, seviye, sonraki parça
-- [x] Mobil dokunmatik kontroller
+- [x] Mobil dokunmatik kontroller (büyük butonlar, bırak, kaydırma, basılı tutma)
 - [x] Görsel tasarım ve animasyonlar
 - [x] Commit, push ve PR (#3)
 
@@ -21,6 +21,7 @@
 - [x] İlk demo video: `tetris-demo.mp4` (~16 sn)
 - [x] Tam ekran video (bloklar zeminde): `tetris-zemine-oturma.mp4` (1920x1200, ~34 sn)
 - [x] Tahta yakın plan: `tetris-tahta-yakin.mp4`
+- [x] Mobil test görselleri: `15-mobil-baslangic.png` … `18-mobil-kaydirma.png`
 - [x] İndirmeden deneme (çalışan): https://htmlpreview.github.io/?https://github.com/EmreArat/SB2-Template/blob/cursor/tetris-oyunu-2b95/tetris.html
 
 ## Notlar
