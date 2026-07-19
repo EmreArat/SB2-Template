@@ -5,7 +5,7 @@
 - [x] Tek HTML dosyasında Tetris oyunu yaz (`tetris.html`)
 - [x] Klavye kontrolleri (oklar, boşluk, P)
 - [x] Skor, seviye, sonraki parça
-- [x] Mobil dokunmatik kontroller (büyük butonlar, bırak, kaydırma, basılı tutma)
+- [x] Mobil tek ekran düzeni (kaydırma yok, dinamik tahta boyutu)
 - [x] Görsel tasarım ve animasyonlar
 - [x] Commit, push ve PR (#3)
 
